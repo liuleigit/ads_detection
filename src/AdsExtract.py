@@ -318,12 +318,12 @@ def get_ads_paras(pname, content_list):
 def modify_ads_results(modify_type, modify_data):
     global ads_dict
     data = modify_data.split(':')
-    name = data[0]
+    name = data[0].decode('utf-8')
     if len(data) < 3 or name not in ads_dict.keys():
         return False, 'error input data'
     p_num = data[1]
     p_text = data[2]
-    paras = ads_dict[name.decode("utf-8")]
+    paras = ads_dict[name]
     if modify_type == 'delete':
         for item in paras:
             para = ''.join(item[1].split())
