@@ -199,7 +199,8 @@ def read_data():
     global ads_dict
     with open(ads_data_file, 'r') as f:
         r = f.read()
-        ads_dict = json.loads(r)
+        if len(r) > 0:
+            ads_dict = json.loads(r)
 #读取最新的广告数据
 ads_update_dict = {}
 def read_update_data():
