@@ -207,7 +207,8 @@ def read_update_data():
     global ads_update_dict
     with open(ads_update_data_file, 'r') as f:
         r = f.read()
-        ads_update_dict = json.loads(r)
+        if len(r) > 0:
+            ads_update_dict = json.loads(r)
 
 #广告变更
 modify_dict = set()
