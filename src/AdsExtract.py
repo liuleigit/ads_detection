@@ -166,7 +166,7 @@ def extract_ads_proc(name, news):
 
 real_path = os.path.split(os.path.realpath(__file__))[0] #文件所在路径
 ads_data_file = real_path + '/../result/ads_data.txt'
-ads_update_data_file = real_path + '/../result/ads_update_data_.txt'
+ads_update_data_file = real_path + '/../result/ads_update_data.txt'
 def extract_ads(news_dict):
     global out_dict
     pool = Pool(30)
