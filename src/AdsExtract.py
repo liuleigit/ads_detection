@@ -268,6 +268,10 @@ def get_ads_paras(pname, content_list):
     to_remove = []
     while i < len(ads_paras):
         if ads_paras[i][0] < 0: #结尾有广告
+            #如果被手动干预判定为非广告,则跳过
+            if int(ads_paras[i][3]) == 0:
+                i += 1
+                continue
             para = ads_paras[i]
             n = int(para[0])
             if len(content_list) < abs(n):
@@ -291,6 +295,10 @@ def get_ads_paras(pname, content_list):
         else: #新闻开头有广告
             k = len(ads_paras) - 1
             while k >= i:
+                #如果被手动干预判定为非广告,则跳过
+                if int(ads_paras[k][3]) == 0:
+                    k -= 1
+                    continue
                 para = ads_paras[k]
                 n = int(para[0])
                 if len(content_list) < abs(n):
