@@ -335,7 +335,7 @@ def modify_ads_results(modify_type, modify_data):
     elif modify_type == 'add':
         for item in paras:
             para = ''.join(item[1].split())
-            if item[0] == int(p_num) and para == ''.join(p_text.encode('utf-8').split()):
+            if item[0] == int(p_num) and para == ''.join(p_text.decode('utf-8').split()):
                 print 'add'
                 item[3] = 1
                 break
