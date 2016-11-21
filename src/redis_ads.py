@@ -23,7 +23,8 @@ def consume_nid():
         url = 'http://120.55.88.11:9000/ml/RemoveAdsOnnidCore'
         data = {}
         data['nid'] = nid
-        requests.get(url, params=data)
+        response = requests.get(url, params=data)
+        print response.content
 
 def consume_process():
     proc = mp.Process(target=consume_nid)
