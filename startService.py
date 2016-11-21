@@ -13,6 +13,7 @@ import tornado.netutil
 import tornado.gen
 import sys
 from src import AdsExtract
+from src import redis_ads
 
 class NewsAdsExtract(tornado.web.RequestHandler):
     def post(self):
@@ -55,6 +56,11 @@ class NewsAdsExtractOnnid(tornado.web.RequestHandler):
         response = AdsExtract.get_ads_paras(pname, content_list)
         self.write(json.dumps(response))
 
+class NewsAdsAddNid(tornado.web.RequestHandler):
+    def post(self):
+        nid = self.get_body_argument('nid')
+        redis_ads.produce_nid(nid)
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
@@ -65,6 +71,7 @@ class Application(tornado.web.Application):
             (r"/ml/ModifyNewsAdsResults", ModifyNewsAdsResults),
             (r"/ml/SaveAdsModify", SaveAdsModify),
             (r"/ml/GetModifiedWechatNames", GetModifiedWechatNames),
+            (r"/ml/NewsAdsAddNid", NewsAdsAddNid),
         ]
         settings = {}
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -73,5 +80,7 @@ if __name__ == "__main__":
     port = sys.argv[1]
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(port)
+    #检测队列
+    redis_ads.consume_nid()
     tornado.ioloop.IOLoop.instance().start()
 

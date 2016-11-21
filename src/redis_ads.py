@@ -7,10 +7,22 @@
 
 import time
 from redis import Redis
-redis = Redis(host='localhost', port=6379, db=2)
-now = time.strftime("%Y/%m/%d %H:%M:%S")
-redis.lpush('test_queue', now)
+redis_inst = Redis(host='localhost', port=6379)
+nid_queue = 'nid_queue'
+def produce_nid(nid):
+    global redis_inst
+    redis_inst.lpush(nid_queue, nid)
 
-res = redis.rpop('test_queue')
-print str(res)
+def consume_nid():
+    global redis_inst
+    import requests
+    while True:
+        nid = redis_inst.brpop(nid_queue)
+        print 'consume id :' + nid
+        url = 'http://120.55.88.11:9000/ml/RemoveAdsOnnidCore'
+        data = {}
+        data['nid'] = nid
+        requests.get(url, params=data)
+
+
 
