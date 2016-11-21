@@ -77,6 +77,7 @@ class Application(tornado.web.Application):
             (r"/ml/SaveAdsModify", SaveAdsModify),
             (r"/ml/GetModifiedWechatNames", GetModifiedWechatNames),
             (r"/ml/NewsAdsAddNid", NewsAdsAddNid),
+            (r"/ml/test", test),
         ]
         settings = {}
         tornado.web.Application.__init__(self, handlers, **settings)
