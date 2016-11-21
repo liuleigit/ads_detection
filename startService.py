@@ -64,7 +64,8 @@ class NewsAdsAddNid(tornado.web.RequestHandler):
 class test(tornado.web.RequestHandler):
     url = 'http://120.55.88.11:9000/ml/test2'
     import requests
-    requests.get(url)
+    response = requests.get(url)
+    print response.content
 
 class Application(tornado.web.Application):
     def __init__(self):
