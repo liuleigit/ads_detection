@@ -19,11 +19,11 @@ def consume_nid():
     import requests
     while True:
         nid = redis_inst.brpop(nid_queue)
-        print 'consume id :' + nid
+        print '------------------------------------------consume id :' + nid[1]
         url = 'http://120.55.88.11:9000/ml/RemoveAdsOnnidCore'
         data = {}
-        data['nid'] = nid
-        response = requests.get(url, params=data)
+        data['nid'] = nid[1]
+        response = requests.post(url, data=data)
         print response.content
 
 def consume_process():
