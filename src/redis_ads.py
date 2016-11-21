@@ -12,6 +12,7 @@ nid_queue = 'nid_queue'
 def produce_nid(nid):
     global redis_inst
     redis_inst.lpush(nid_queue, nid)
+    print 'produce nid: ' + nid
 
 def consume_nid():
     global redis_inst
