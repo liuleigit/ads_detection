@@ -26,7 +26,7 @@ def consume_nid():
         requests.get(url, params=data)
 
 def consume_process():
-    proc = mp.Process(target=consume_nid())
+    proc = mp.Process(target=consume_nid)
     proc.start()
 
 
