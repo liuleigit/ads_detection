@@ -81,6 +81,6 @@ if __name__ == "__main__":
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(port)
     #检测队列
-    redis_ads.consume_nid()
+    redis_ads.consume_process()
     tornado.ioloop.IOLoop.instance().start()
 

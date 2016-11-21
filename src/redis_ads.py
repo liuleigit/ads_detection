@@ -5,7 +5,7 @@
 # @File    : redis.py
 # @Software: PyCharm Community Edition
 
-import time
+import multiprocessing as mp
 from redis import Redis
 redis_inst = Redis(host='localhost', port=6379)
 nid_queue = 'nid_queue'
@@ -25,5 +25,8 @@ def consume_nid():
         data['nid'] = nid
         requests.get(url, params=data)
 
+def consume_process():
+    proc = mp.Process(target=consume_nid())
+    proc.start()
 
 
