@@ -61,6 +61,11 @@ class NewsAdsAddNid(tornado.web.RequestHandler):
         nid = self.get_body_argument('nid')
         redis_ads.produce_nid(nid)
 
+class test(tornado.web.RequestHandler):
+    url = 'http://120.55.88.11:9000/ml/test2'
+    import requests
+    requests.get(url)
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
